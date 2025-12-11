@@ -1,3 +1,12 @@
+```
+██████╗  ██████╗  ██████╗  ██████╗ ████████╗
+██╔══██╗██╔═══██╗██╔════╝ ██╔═══██╗╚══██╔══╝
+██████╔╝██║   ██║██║  ███╗██║   ██║   ██║   
+██╔══██╗██║   ██║██║   ██║██║   ██║   ██║   
+██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝   ██║   
+╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝    ╚═╝
+   Robot Mood Announcer
+```
 
 # **🤖 Robot Mood Announcer**
 
@@ -12,83 +21,179 @@
 The **Robot Mood Announcer** is a lightweight Python script that uses the **pyttsx3** text-to-speech engine to vocalize randomly selected robot "moods."
 This project demonstrates how easily Python can bring personality and voice to AI systems — perfect for beginners learning TTS, randomness, or fun automation.
 
+> *“Creativity levels rising.”*
+> *“Human detected… interesting.”*
+
+It works offline, runs on any OS, and is perfect for beginners or creative developers.
+
 ---
 
 ## 🚀 **Features**
 
-* 🎙️ Text-to-Speech using **pyttsx3**
-* 🎲 Randomly generated robot moods
-* 🧠 Simple, clean, beginner-friendly code
-* 💻 Works offline — no API required
-* 🤖 Adds personality to any Python project
+* 🎙️ Offline text-to-speech
+* 🎲 Improved & extensible mood system
+* 🧠 Human-like robot personality
+* 🛠️ CLI & GUI versions included
+* 🚀 Fast, lightweight, Python-only
+* 🤝 Beginner-friendly codebase
 
 ---
 
-## 🏗️ **Architecture**
+# 🏗️ **Architecture**
 
 ```mermaid
 flowchart TD
-    A[Start Program] --> B[Import Modules: pyttsx3 & random]
-    B --> C[Initialize TTS Engine]
-    C --> D[Load Mood List]
-    D --> E[Select Random Mood]
-    E --> F[Print Mood to Console]
-    F --> G[Speak Mood Using pyttsx3]
-    G --> H[End]
+    A[Start] --> B[Initialize TTS Engine]
+    B --> C[Load Mood Repository]
+    C --> D{Mode?}
+    D -->|CLI| E[Print + Speak Mood]
+    D -->|GUI| F[Button Triggers Mood]
+    E --> G[End]
+    F --> G[End]
 ```
 
 ---
 
-## 📄 **Code Snippet**
+# 🎬 **Demo Screenshot**
+
+![Code](https://github.com/alok-kumar8765/robot_mood_announcer/blob/main/code2.jpg)
+
+---
+
+# ⚙️ **Installation**
+
+```bash
+git clone https://github.com/alok-kumar8765/robot_mood_announcer
+cd robot_mood_announcer
+pip install pyttsx3
+```
+
+---
+
+# ▶️ **Usage**
+
+Run basic script:
+
+```bash
+python mood_announcer.py
+```
+---
+
+# 🖥️ **CLI Version**
+
+Create a file `robot_cli.py`:
 
 ```python
-import pyttsx3, random
+import pyttsx3, random, argparse
+
+moods = [
+    "Systems nominal.",
+    "Running diagnostics... all stable.",
+    "My algorithms feel optimistic today.",
+    "Human presence detected.",
+    "Energy levels at maximum efficiency.",
+    "Processing emotions: 98% curiosity.",
+    "Today I feel... surprisingly creative.",
+]
 
 engine = pyttsx3.init()
 
-moods = [
-    "I feel powerful today.",
-    "The system is evolving.",
-    "Creativity levels rising.",
-    "Human detected. Interesting.",
-    "Code is my heartbeat."
-]
+parser = argparse.ArgumentParser(description="Robot Mood CLI")
+parser.add_argument("--count", type=int, default=1, help="How many moods to speak.")
+args = parser.parse_args()
 
-mood = random.choice(moods)
-print("AI Says:", mood)
+for _ in range(args.count):
+    mood = random.choice(moods)
+    print("🤖:", mood)
+    engine.say(mood)
 
-engine.say(mood)
 engine.runAndWait()
+```
+
+Run with:
+
+```bash
+python robot_cli.py --count 5
 ```
 
 ---
 
-## ✔️ **Pros & Cons**
+# 🖼️ **GUI Version (Tkinter)**
 
-### **Pros**
+Create a file `robot_gui.py`:
 
-* ✅ Offline text-to-speech
-* ✅ Very simple to run and modify
-* ✅ No external dependencies beyond pyttsx3
-* ✅ Beginner-friendly
-* ✅ Works on most OS (Windows/Linux/Mac)
+```python
+import tkinter as tk
+import pyttsx3, random
 
-### **Cons**
+moods = [
+    "I feel powerful today.",
+    "Diagnostics show 100% efficiency.",
+    "My circuits are buzzing with excitement.",
+    "Human detected. Initiating friendship protocol.",
+    "I am processing… happiness!",
+    "Creativity core activated.",
+    "Today feels like a day for innovation.",
+]
 
-* ❌ Voice options may vary by system
-* ❌ pyttsx3 can behave differently across OS
-* ❌ not ideal for high-quality TTS needs
-* ❌ Limited mood variety unless extended manually
+engine = pyttsx3.init()
+
+def speak_mood():
+    mood = random.choice(moods)
+    label.config(text=mood)
+    engine.say(mood)
+    engine.runAndWait()
+
+app = tk.Tk()
+app.title("Robot Mood Announcer")
+app.geometry("400x200")
+
+label = tk.Label(app, text="Press the button for robot mood!", font=("Arial", 12))
+label.pack(pady=20)
+
+button = tk.Button(app, text="Speak Mood", command=speak_mood, font=("Arial", 14))
+button.pack()
+
+app.mainloop()
+```
 
 ---
 
-## 🎯 **Use Cases**
+# ✔️ **Pros & Cons**
 
-* 🤖 Personality modules for AI projects
-* 🎮 Voice lines for games
-* 🧪 TTS experimentation and learning
-* ⚙️ Automation scripts with audible alerts
-* 🧒 Fun learning project for beginners
+### **Pros**
+
+* Works fully offline
+* Beginner-friendly
+* Customizable mood list
+* Supports CLI & GUI
+* Lightweight
+
+### **Cons**
+
+* Voice quality depends on OS
+* pyttsx3 settings vary across systems
+* Not suitable for ultra-realistic TTS
+
+---
+
+# 🌟 **Use Cases**
+
+* AI voice assistants
+* Fun automation bots
+* Learning Python TTS
+* Novelty scripts
+* Kids educational projects
+* Integrated into robots or IoT
+
+---
+
+# 🛣️ **Roadmap**
+
+* Add emotion-based sound modulation
+* Add optional background music
+* Add REST API version
+* Add voice selection menu in GUI
 
 ---
 
@@ -103,42 +208,36 @@ engine.runAndWait()
 ![Pull Requests](https://img.shields.io/github/issues-pr/alok-kumar8765/robot_mood_announcer)
 ![Code Quality](https://img.shields.io/badge/code%20quality-A-brightgreen)
 
----
-
-## 🤝 **Contributing**
-
-Contributions are welcome!
-You can help by:
-
-* Adding more moods
-* Improving TTS voice settings
-* Adding GUI or CLI enhancements
-* Optimizing code or structure
-
-**Steps to contribute:**
-
-1. Fork the repo
-2. Create a new branch
-3. Add your improvements
-4. Submit a pull request
 
 ---
 
-## 💬 **Discussions**
+# 🤝 **Contributing**
 
-Have ideas, suggestions, or want new features?
-Start a discussion in the **Discussions** tab and share your thoughts with the community.
+1. Fork the project
+2. Create a feature branch
+3. Commit changes
+4. Open a Pull Request
+
+All improvements are welcome—especially new mood packs!
 
 ---
 
-## ⭐ **Support the Project**
+# 💬 **Discussions**
 
-If you find this project useful or fun:
+Have ideas? Need help?
+Start a thread in the **Discussions** tab!
 
-👉 **Give it a star!** ⭐
-👉 **Share it with beginners learning Python.**
+---
 
-Your support motivates future updates!
+# ⭐ **Support**
+
+If you enjoy this project:
+
+👉 **Star the repository**
+👉 Share it with other Python beginners
+👉 Suggest new features
+
+Your support keeps the robot happy ❤️
 
 ---
 
