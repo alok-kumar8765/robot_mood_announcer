@@ -63,7 +63,7 @@ flowchart TD
 # ⚙️ **Installation**
 
 ```bash
-git clone https://github.com/alok-kumar8765/robot_mood_announcer
+git clone https://github.com/alok-kumar8765/robot_mood_announcer.git
 cd robot_mood_announcer
 pip install pyttsx3
 ```
